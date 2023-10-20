@@ -8,10 +8,7 @@ import useEscapeKey from '../../hooks/useEscapeKey';
 import { ToastContext } from '../ToastProvider/ToastProvider';
 
 function ToastShelf() {
-
   const { toastList, dismissToast, dismissAllToast } = React.useContext(ToastContext);
-  console.log(toastList);
-  console.log(dismissAllToast);
 
   useEscapeKey(dismissAllToast);
 
