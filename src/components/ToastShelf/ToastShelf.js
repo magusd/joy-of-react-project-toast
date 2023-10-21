@@ -2,24 +2,25 @@ import React from 'react';
 
 import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
-
-import useEscapeKey from '../../hooks/useEscapeKey';
-
 import { ToastContext } from '../ToastProvider/ToastProvider';
+import VisuallyHidden from '../VisuallyHidden';
 
 function ToastShelf() {
-  const { toastList, dismissToast, dismissAllToast } = React.useContext(ToastContext);
+  const { toastList, dismissToast } = React.useContext(ToastContext);
 
-  useEscapeKey(dismissAllToast);
+
 
   return (
-    <ol className={styles.wrapper}>
+    <ol className={styles.wrapper}
+      role="region" aria-live="polite" aria-atomic="true" aria-label="Notifications"
+    >
       {toastList.map((toast, index) => {
         return (
           <li className={styles.toastWrapper} key={index}>
             <Toast dismiss={() => { dismissToast(index) }}
               variant={toast.variant}
             >
+              <VisuallyHidden>{toast.variant}</VisuallyHidden>
               {toast.text}
             </Toast>
           </li>)
